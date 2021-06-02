@@ -1,22 +1,12 @@
-// Global Constants
+//Gobal
 const apiBaseUrl = 'https://api.themoviedb.org/3';
 const imageBaseUrl = 'https://image.tmdb.org/t/p'
 const apiKey = '93d205263e4f03cee98948af6493992a';
+let currentApiPage = 1;
+let activeSearch = false;
 
-// Global Variables
-var currentApiPage = 1;
-var activeSearch = false;
-
-// Page Elements
-const searchForm = document.getElementById('search-form');
-const searchInput = document.getElementById('search-input');
-const closeSearchBtn = document.getElementById('close-search-btn');
-const moviesSection = document.getElementById('movies-section');
 const nowPlayingMovies = document.getElementById('now-playing-movies');
 const loadMoreBtn = document.getElementById('load-more-movies-btn');
-const searchSection = document.getElementById('search-section');
-const moviesSearchResults = document.getElementById('movie-search-results');
-
 
 async function fetchMoviesNowPlaying() {
     const response = await fetch(`${apiBaseUrl}/movie/now_playing?api_key=${apiKey}&page=${currentApiPage}`);
@@ -128,6 +118,12 @@ function loadMoreMovies() {
     fetchMoviesNowPlaying();
 }
 
+
+const moviesSearchResults = document.getElementById('movie-search-results');
+const closeSearchBtn = document.getElementById('close-search-btn');
+const searchSection = document.getElementById('search-section');
+const moviesSection = document.getElementById('movies-section');
+
 function closeSearch() {
     activeSearch = false;
     moviesSection.classList.remove('hidden');
@@ -137,6 +133,7 @@ function closeSearch() {
     searchInput.value = '';
 }
 
+const searchInput = document.getElementById('search-input');
 function handleSearchInputFocus(event) {
     event.preventDefault();
 
@@ -151,6 +148,8 @@ function handleSearchInputFocus(event) {
     closeSearchBtn.classList.remove('hidden');
 }
 
+
+const searchForm = document.getElementById('search-form');
 async function handleSearchFormSubmit(event) {
     event.preventDefault();
     moviesSearchResults.innerHTML = '';
@@ -178,3 +177,4 @@ function init() {
 }
 
 init();
+
